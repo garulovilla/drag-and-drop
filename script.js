@@ -43,7 +43,6 @@ function processFiles(files) {
 }
 
 function loadNextFile() {
-	console.log('files count: ' + fileList.length);
 	if(fileList.length) {
 		// The shift() method removes the first item of an array, and returns that item.
 		uploadFile(fileList.shift());
@@ -57,7 +56,6 @@ function uploadFile(file) {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'upload.php', true);
 	xhr.onload = function(e) {
-		console.log('load: ' + this.responseText);
 		if(this.responseText != 'error') {
 			filesSection.innerHTML += '<p class="sucess">' + this.responseText + '<span>Success</span></p>';
 		} else {
@@ -71,7 +69,7 @@ function uploadFile(file) {
 	};
 	// Handle Uploads - Progress Bar
 	xhr.upload.onloadstart = function (e) {
-		progressSection.innerHTML = '<p></p><progress value="0" max="100" class="progress-bar">0%</progress>';
+		progressSection.innerHTML = '<p></p><progress value="0" max="100" class="progress-bar"></progress>';
 	};
 	xhr.upload.onprogress = function(e) {
 		if (e.lengthComputable) {
@@ -83,7 +81,6 @@ function uploadFile(file) {
 	    }
 	};
 	xhr.upload.onload = function (e) {
-		//loadNextFile();
 	};
 
 	// FormData
